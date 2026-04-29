@@ -100,24 +100,62 @@ const episodes = [
   title="Watch — HomesteadLabs"
   description="Episodes of HomesteadLabs on YouTube. Every product is a video."
 >
-  <section class="py-20 md:py-32 border-b border-ink/10 relative overflow-hidden">
+<!-- HERO -->
+  <section class="py-16 md:py-24 border-b border-ink/10 mesh-warm relative overflow-hidden">
     <div class="grain absolute inset-0 opacity-40"></div>
     <div class="container-prose relative">
       <div class="text-eyebrow text-ember mb-6">Watch</div>
-      <h1 class="font-display text-6xl md:text-8xl tracking-tightest leading-[0.92] mb-8 max-w-4xl">
+      <h1 class="font-display text-5xl md:text-7xl tracking-tightest leading-[0.92] mb-6 max-w-4xl">
         Every product<br />is a video.
       </h1>
-      <p class="text-body-lg text-ink/70 max-w-2xl leading-relaxed mb-10">
+      <p class="text-body-lg text-ink/70 max-w-2xl leading-relaxed mb-12">
         HomesteadLabs ships modules on YouTube first. Every episode is a real
-        build, end-to-end — sensors, software, dashboard, payoff.
-        New episode every three to four weeks.
+        build, end-to-end. New episode every three to four weeks.
       </p>
-      <a href="https://youtube.com/@homesteadlabs" class="btn-primary">
-        Subscribe on YouTube
-        <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
-          <path d="M5 12h14M13 5l7 7-7 7" stroke-linecap="round" stroke-linejoin="round" />
-        </svg>
-      </a>
+    </div>
+  </section>
+
+  <!-- FEATURED EPISODE -->
+  <section class="py-12 md:py-20 border-b border-ink/10 bg-ink relative overflow-hidden">
+    <div class="grain absolute inset-0 opacity-30 mix-blend-screen"></div>
+    <div class="grid-bg-dark absolute inset-0 opacity-50"></div>
+    <div class="container-prose relative">
+      <div class="grid lg:grid-cols-12 gap-8 lg:gap-12 items-center">
+        <div class="lg:col-span-7">
+          <!-- Trailer player placeholder -->
+          <div class="aspect-video bg-paper/5 border border-paper/10 relative overflow-hidden group cursor-pointer">
+            <!-- Replace this whole block with your YouTube embed once trailer is up -->
+            <div class="absolute inset-0 flex items-center justify-center">
+              <div class="w-20 h-20 rounded-full bg-ember/20 border border-ember/40 flex items-center justify-center group-hover:bg-ember/40 transition-colors">
+                <svg width="32" height="32" viewBox="0 0 24 24" fill="currentColor" class="text-ember ml-1">
+                  <path d="M8 5v14l11-7z"/>
+                </svg>
+              </div>
+            </div>
+            <div class="absolute bottom-4 left-4 text-eyebrow text-paper/60 font-mono">
+              Trailer · Coming soon
+            </div>
+          </div>
+        </div>
+        <div class="lg:col-span-5">
+          <div class="text-eyebrow text-ember mb-4">Now in production</div>
+          <h2 class="font-display text-4xl md:text-5xl tracking-tighter leading-[0.95] text-paper mb-6">
+            Episode 01:<br />PeckPerformance
+          </h2>
+          <p class="text-base text-paper/70 leading-relaxed mb-8">
+            A multi-camera computer vision system that ranks the chickens by
+            productivity. Then ranks Brad. The first module of CoopOps,
+            shipping with the launch of CoopOS v1.0.
+          </p>
+          <div class="flex items-center gap-4 text-sm text-paper/50 font-mono">
+            <span>14–17 min</span>
+            <span class="text-paper/20">·</span>
+            <span>CoopOps Suite</span>
+            <span class="text-paper/20">·</span>
+            <span>Q2 2026</span>
+          </div>
+        </div>
+      </div>
     </div>
   </section>
 
