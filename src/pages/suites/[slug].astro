@@ -1,6 +1,7 @@
 ---
 import BaseLayout from '@layouts/BaseLayout.astro';
 import ProductCard from '@components/ProductCard.astro';
+import MediaFrame from '@components/MediaFrame.astro';
 import { suites, productsBySuite } from '@data/catalog';
 
 export async function getStaticPaths() {
@@ -19,36 +20,54 @@ const liveCount = modules.filter((m) => m.status === 'live').length;
   title={`${suite.name} — HomesteadLabs`}
   description={suite.tagline}
 >
-  <!-- HERO -->
-  <section class="py-20 md:py-32 border-b border-ink/10 relative overflow-hidden">
-    <div class="grain absolute inset-0 opacity-40"></div>
-    <div class="container-prose relative">
-      <nav class="mb-12 text-eyebrow flex items-center gap-3 text-ink/40">
-        <a href="/suites" class="hover:text-ember transition-colors">Suites</a>
-        <span>/</span>
-        <span class="text-ink">{suite.name}</span>
-      </nav>
-
-      <div class="grid md:grid-cols-12 gap-8 md:gap-16 items-end">
-        <div class="md:col-span-8">
-          <div class="text-eyebrow text-ember mb-6">Suite</div>
-          <h1 class="font-display text-6xl md:text-8xl tracking-tightest leading-[0.92] mb-6">
+  <!-- HERO with full-width image -->
+  <section class="relative overflow-hidden border-b border-ink/10">
+    <div class="relative">
+      <MediaFrame
+        src={suite.image}
+        label={suite.name}
+        aspectClass="aspect-[21/9] md:aspect-[21/7]"
+        category="suite"
+      />
+      <!-- Color tint overlay -->
+      <div
+        class="absolute inset-0 mix-blend-multiply opacity-50"
+        style={`background: linear-gradient(135deg, ${suite.accent}80 0%, transparent 100%);`}
+      ></div>
+      <!-- Bottom fade -->
+      <div class="absolute inset-0 bg-gradient-to-t from-ink/80 via-transparent to-transparent"></div>
+      <!-- Content overlay -->
+      <div class="absolute inset-0 flex items-end">
+        <div class="container-prose w-full pb-12 md:pb-20">
+          <nav class="mb-6 text-eyebrow flex items-center gap-3 text-paper/60">
+            <a href="/suites" class="hover:text-ember transition-colors">Suites</a>
+            <span>/</span>
+            <span class="text-paper">{suite.name}</span>
+          </nav>
+          <div class="text-eyebrow text-ember mb-4">Suite</div>
+          <h1 class="font-display text-7xl md:text-9xl tracking-tightest leading-[0.92] text-paper">
             {suite.name}
           </h1>
-          <p class="font-display italic text-2xl md:text-3xl text-ember leading-snug max-w-3xl">
-            {suite.tagline}
-          </p>
         </div>
-        <div class="md:col-span-4 md:pt-2">
-          <div class="text-eyebrow text-ink/40 mb-3">Status</div>
-          <div class="font-mono text-sm text-ink/80">
-            {liveCount} of {modules.length} modules live
+      </div>
+    </div>
+  </section>
+
+  <!-- TAGLINE / STATUS BAR -->
+  <section class="py-8 border-b border-ink/10 bg-paper-warm">
+    <div class="container-prose">
+      <div class="flex flex-col md:flex-row md:items-center md:justify-between gap-4">
+        <p class="font-display italic text-2xl md:text-3xl text-ember leading-snug">
+          {suite.tagline}
+        </p>
+        <div class="flex items-center gap-4">
+          <div class="text-eyebrow text-ink/40">Modules</div>
+          <div class="font-mono text-sm">
+            <span class="text-ember">{liveCount}</span>
+            <span class="text-ink/40"> / {modules.length} LIVE</span>
           </div>
-          <div class="mt-2 w-full h-1 bg-ink/10 rounded-full overflow-hidden">
-            <div
-              class="h-full bg-ember transition-all duration-1000"
-              style={`width: ${(liveCount / modules.length) * 100}%`}
-            ></div>
+          <div class="w-32 h-1 bg-ink/10 rounded-full overflow-hidden">
+            <div class="h-full bg-ember" style={`width: ${(liveCount / modules.length) * 100}%`}></div>
           </div>
         </div>
       </div>
@@ -56,7 +75,7 @@ const liveCount = modules.filter((m) => m.status === 'live').length;
   </section>
 
   <!-- DESCRIPTION -->
-  <section class="py-20 md:py-24 border-b border-ink/10">
+  <section class="py-20 md:py-32 border-b border-ink/10 mesh-subtle">
     <div class="container-prose">
       <div class="grid md:grid-cols-12 gap-8 md:gap-16">
         <div class="md:col-span-4">

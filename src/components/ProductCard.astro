@@ -1,5 +1,6 @@
 ---
 import type { Product } from '@data/catalog';
+import MediaFrame from './MediaFrame.astro';
 
 export interface Props {
   product: Product;
@@ -12,39 +13,48 @@ const isLive = product.status === 'live';
 
 <a
   href={`/products/${product.slug}`}
-  class:list={[
-    'card group block p-8 hover:transform-none',
-    variant === 'compact' ? 'p-6' : 'p-8',
-  ]}
+  class="card group block"
 >
-  <div class="flex items-center justify-between mb-6">
-    <div class:list={['pill', isLive ? 'pill-live' : 'pill-soon']}>
-      {isLive ? 'Available' : 'Coming soon'}
-    </div>
-    {product.episode && (
-      <div class="text-eyebrow text-ink/40">
-        EP {String(product.episode).padStart(2, '0')}
+  <!-- Image -->
+  <MediaFrame
+    src={product.image}
+    label={product.name}
+    aspectClass="aspect-[4/3]"
+    category="product"
+    class="border-b border-ink/10"
+  />
+
+  <!-- Content -->
+  <div class="p-6">
+    <div class="flex items-center justify-between mb-4">
+      <div class:list={['pill', isLive ? 'pill-live' : 'pill-soon']}>
+        {isLive ? 'Available' : 'Coming soon'}
       </div>
-    )}
-  </div>
+      {product.episode && (
+        <div class="text-eyebrow text-ink/40">
+          EP {String(product.episode).padStart(2, '0')}
+        </div>
+      )}
+    </div>
 
-  <h3 class="font-display text-3xl tracking-tighter mb-2 leading-tight">
-    {product.name}
-  </h3>
+    <h3 class="font-display text-2xl tracking-tighter mb-2 leading-tight">
+      {product.name}
+    </h3>
 
-  <p class="text-sm text-ink/65 leading-relaxed mb-6">
-    {product.tagline}
-  </p>
+    <p class="text-sm text-ink/65 leading-relaxed mb-4">
+      {product.tagline}
+    </p>
 
-  <div class="flex items-center justify-between pt-4 border-t border-ink/10">
-    <span class="text-xs font-mono uppercase tracking-wider text-ink/40">
-      {product.type}
-    </span>
-    <span class="text-sm text-ink/70 group-hover:text-ember transition-colors flex items-center gap-1.5">
-      Learn more
-      <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
-        <path d="M5 12h14M13 5l7 7-7 7" stroke-linecap="round" stroke-linejoin="round" />
-      </svg>
-    </span>
+    <div class="flex items-center justify-between pt-4 border-t border-ink/10">
+      <span class="text-xs font-mono uppercase tracking-wider text-ink/40">
+        {product.type}
+      </span>
+      <span class="text-sm text-ink/70 group-hover:text-ember transition-colors flex items-center gap-1.5">
+        Learn more
+        <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+          <path d="M5 12h14M13 5l7 7-7 7" stroke-linecap="round" stroke-linejoin="round" />
+        </svg>
+      </span>
+    </div>
   </div>
 </a>

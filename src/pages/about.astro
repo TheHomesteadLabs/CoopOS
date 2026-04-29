@@ -1,12 +1,14 @@
 ---
 import BaseLayout from '@layouts/BaseLayout.astro';
+import MediaFrame from '@components/MediaFrame.astro';
 ---
 
 <BaseLayout
   title="About — HomesteadLabs"
   description="HomesteadLabs is a Canadian software company headquartered in Tatlock, Ontario."
 >
-  <section class="py-20 md:py-32 border-b border-ink/10 relative overflow-hidden">
+  <!-- HERO -->
+  <section class="py-20 md:py-32 border-b border-ink/10 mesh-warm relative overflow-hidden">
     <div class="grain absolute inset-0 opacity-40"></div>
     <div class="container-prose relative">
       <div class="text-eyebrow text-ember mb-6">About</div>
@@ -79,12 +81,15 @@ import BaseLayout from '@layouts/BaseLayout.astro';
     <div class="container-prose relative">
       <div class="text-eyebrow text-ember mb-12">Leadership</div>
       <div class="grid md:grid-cols-2 gap-12 md:gap-16">
+        <!-- Brad — main leadership card -->
         <div>
-          <div class="aspect-square bg-ink/5 border border-ink/10 mb-6 relative overflow-hidden">
-            <div class="absolute inset-0 flex items-center justify-center">
-              <span class="font-display text-9xl text-ink/15">BC</span>
-            </div>
-          </div>
+          <MediaFrame
+            src="brad.jpg"
+            label="Brad Conlin"
+            aspectClass="aspect-square"
+            category="team"
+            class="border border-ink/10 mb-6"
+          />
           <h3 class="font-display text-3xl tracking-tighter mb-1">Brad Conlin</h3>
           <p class="text-eyebrow text-ember">Jr. Engineer / Lead Janitor / CEO</p>
           <p class="mt-4 text-sm text-ink/65 leading-relaxed">
@@ -127,7 +132,7 @@ import BaseLayout from '@layouts/BaseLayout.astro';
   </section>
 
   <!-- VALUES -->
-  <section class="py-20 md:py-32">
+  <section class="py-20 md:py-32 dots-bg">
     <div class="container-prose">
       <div class="text-eyebrow text-ember mb-8">Operating principles</div>
       <div class="grid md:grid-cols-3 gap-8 md:gap-12">

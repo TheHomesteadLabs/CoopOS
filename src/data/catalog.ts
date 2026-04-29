@@ -9,12 +9,13 @@ export interface Product {
   tagline: string;
   description: string;
   status: ProductStatus;
-  suite: string | null; // null for standalone (e.g., WeatherWatch) or platform-level (CoopOS, HomesteadHQ)
+  suite: string | null;
   episode: number | null;
   type: 'os' | 'dashboard' | 'hardware' | 'software' | 'sensor';
   features?: string[];
   specs?: { label: string; value: string }[];
-  shipsWith?: string[]; // related products
+  shipsWith?: string[];
+  image?: string; // Path under /public/images/products/, e.g. "coopcam.jpg"
 }
 
 export interface Suite {
@@ -22,7 +23,9 @@ export interface Suite {
   name: string;
   tagline: string;
   description: string;
-  modules: string[]; // product slugs
+  modules: string[];
+  image?: string; // Path under /public/images/suites/
+  accent: string; // hex color for visual differentiation
 }
 
 // ---------- SUITES ----------
@@ -35,6 +38,8 @@ export const suites: Suite[] = [
     description:
       'CoopOps is the original suite. The chickens are the workforce. The coop is headquarters. Every module under CoopOps is built around a single conviction: a productive flock is a measurable flock.',
     modules: ['peckperformance', 'thedoorman', 'coopair'],
+    image: 'coopops.jpg',
+    accent: '#C2410C',
   },
   {
     slug: 'vegeops',
@@ -43,6 +48,8 @@ export const suites: Suite[] = [
     description:
       'Plants do not wilt before they fail. They fail in stages, on a timeline only sensors can see. VegeOps brings that timeline above ground.',
     modules: ['growguard', 'canopycontrol'],
+    image: 'vegeops.jpg',
+    accent: '#658856',
   },
   {
     slug: 'perimeterops',
@@ -51,6 +58,8 @@ export const suites: Suite[] = [
     description:
       'Most of what happens on a hundred acres happens without you. PerimeterOps closes the gap between what happens and what gets logged.',
     modules: ['trailscout', 'drivewatch', 'runcam'],
+    image: 'perimeterops.jpg',
+    accent: '#525252',
   },
   {
     slug: 'aquaops',
@@ -59,13 +68,14 @@ export const suites: Suite[] = [
     description:
       'Water is the most consequential system on a property and the least observable. AquaOps treats every body of water as a process, not a resource.',
     modules: ['pondpulse'],
+    image: 'aquaops.jpg',
+    accent: '#3B6E8F',
   },
 ];
 
 // ---------- PRODUCTS ----------
 
 export const products: Product[] = [
-  // ----- PLATFORM -----
   {
     slug: 'coopos',
     name: 'CoopOS',
@@ -91,6 +101,7 @@ export const products: Product[] = [
       { label: 'Release', value: 'v1.0 — Q2 2026' },
     ],
     shipsWith: ['coopcam', 'eggwatch'],
+    image: 'coopos.jpg',
   },
   {
     slug: 'homesteadhq',
@@ -113,9 +124,8 @@ export const products: Product[] = [
       { label: 'Powered by', value: 'PeckPerformance + 8 modules' },
       { label: 'Targeted release', value: 'Q4 2026' },
     ],
+    image: 'homesteadhq.jpg',
   },
-
-  // ----- COOPOPS -----
   {
     slug: 'peckperformance',
     name: 'PeckPerformance',
@@ -140,6 +150,7 @@ export const products: Product[] = [
       { label: 'Powers', value: 'HomesteadHQ team-performance view' },
     ],
     shipsWith: ['coopcam', 'eggwatch'],
+    image: 'peckperformance.jpg',
   },
   {
     slug: 'coopcam',
@@ -166,6 +177,7 @@ export const products: Product[] = [
       { label: 'Mounting', value: 'Wall, ceiling, beam' },
     ],
     shipsWith: ['coopos', 'peckperformance'],
+    image: 'coopcam.jpg',
   },
   {
     slug: 'eggwatch',
@@ -192,6 +204,7 @@ export const products: Product[] = [
       { label: 'Mounting', value: 'Ceiling, beam, frame' },
     ],
     shipsWith: ['coopos', 'peckperformance'],
+    image: 'eggwatch.jpg',
   },
   {
     slug: 'thedoorman',
@@ -209,6 +222,7 @@ export const products: Product[] = [
       'Linear actuator with limit switches',
       'Manual override at the panel',
     ],
+    image: 'thedoorman.jpg',
   },
   {
     slug: 'coopair',
@@ -227,9 +241,8 @@ export const products: Product[] = [
       'Learned baseline anomaly detection',
       'HR-approved.',
     ],
+    image: 'coopair.jpg',
   },
-
-  // ----- VEGEOPS -----
   {
     slug: 'growguard',
     name: 'GrowGuard',
@@ -246,6 +259,7 @@ export const products: Product[] = [
       'Optional WeatherWatch forecast integration',
       'Schedule-free operation',
     ],
+    image: 'growguard.jpg',
   },
   {
     slug: 'canopycontrol',
@@ -264,9 +278,8 @@ export const products: Product[] = [
       'WeatherWatch temperature correlation',
       'Extends GrowGuard.',
     ],
+    image: 'canopycontrol.jpg',
   },
-
-  // ----- PERIMETEROPS -----
   {
     slug: 'trailscout',
     name: 'TrailScout',
@@ -283,6 +296,7 @@ export const products: Product[] = [
       'On-device species classification',
       'Rolling census dashboard',
     ],
+    image: 'trailscout.jpg',
   },
   {
     slug: 'drivewatch',
@@ -300,6 +314,7 @@ export const products: Product[] = [
       'License-plate read on vehicle events',
       'SMS notification via CoopOS',
     ],
+    image: 'drivewatch.jpg',
   },
   {
     slug: 'runcam',
@@ -317,9 +332,8 @@ export const products: Product[] = [
       'Free-range activity attribution',
       'Sold separately from PeckPerformance.',
     ],
+    image: 'runcam.jpg',
   },
-
-  // ----- AQUAOPS -----
   {
     slug: 'pondpulse',
     name: 'PondPulse',
@@ -337,9 +351,8 @@ export const products: Product[] = [
       'Anomaly detection on time-series data',
       '3D-printed buoy housing',
     ],
+    image: 'pondpulse.jpg',
   },
-
-  // ----- STANDALONE -----
   {
     slug: 'weatherwatch',
     name: 'WeatherWatch',
@@ -356,6 +369,7 @@ export const products: Product[] = [
       'Learned forecast-correction model',
       'Feeds GrowGuard, TheDoorMan, CanopyControl, PondPulse',
     ],
+    image: 'weatherwatch.jpg',
   },
 ];
 

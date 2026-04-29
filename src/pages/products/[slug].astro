@@ -1,5 +1,6 @@
 ---
 import BaseLayout from '@layouts/BaseLayout.astro';
+import MediaFrame from '@components/MediaFrame.astro';
 import { products, productBySlug, suiteBySlug } from '@data/catalog';
 
 export async function getStaticPaths() {
@@ -24,10 +25,10 @@ const relatedProducts = product.shipsWith
   <!-- HERO ============================================== -->
   <section class:list={[
     'relative overflow-hidden border-b border-ink/10',
-    isLive ? 'bg-paper' : 'bg-paper-warm',
+    isLive ? 'mesh-warm' : 'bg-paper-warm',
   ]}>
     <div class="grain absolute inset-0 opacity-30"></div>
-    <div class="container-prose py-20 md:py-32 relative">
+    <div class="container-prose pt-16 md:pt-24 pb-0 relative">
       <!-- Breadcrumb -->
       <nav class="mb-12 text-eyebrow flex items-center gap-3 text-ink/40">
         <a href="/products" class="hover:text-ember transition-colors">Products</a>
@@ -41,9 +42,9 @@ const relatedProducts = product.shipsWith
         <span class="text-ink">{product.name}</span>
       </nav>
 
-      <div class="grid md:grid-cols-12 gap-8 md:gap-16 items-end">
-        <div class="md:col-span-8">
-          <div class="flex items-center gap-3 mb-8">
+      <div class="grid lg:grid-cols-12 gap-8 lg:gap-16 items-center">
+        <div class="lg:col-span-7">
+          <div class="flex items-center gap-3 mb-8 flex-wrap">
             <div class:list={['pill', isLive ? 'pill-live' : 'pill-soon']}>
               {isLive ? 'Available now' : 'Coming soon'}
             </div>
@@ -61,23 +62,34 @@ const relatedProducts = product.shipsWith
             {product.name}
           </h1>
 
-          <p class="font-display italic text-2xl md:text-3xl text-ember leading-snug max-w-3xl">
+          <p class="font-display italic text-2xl md:text-3xl text-ember leading-snug max-w-3xl mb-8">
             {product.tagline}
           </p>
-        </div>
 
-        <div class="md:col-span-4 md:pt-2">
-          <p class="text-body-lg text-ink/75 leading-relaxed">
+          <p class="text-body-lg text-ink/75 leading-relaxed max-w-2xl">
             {product.description}
           </p>
         </div>
+
+        <div class="lg:col-span-5 lg:col-start-8">
+          <MediaFrame
+            src={product.image}
+            label={product.name}
+            aspectClass="aspect-[4/5]"
+            category="product"
+            class="border border-ink/10 shadow-2xl shadow-ember/5"
+          />
+        </div>
       </div>
+
+      <!-- Spacer for hero bottom -->
+      <div class="h-20 md:h-32"></div>
     </div>
   </section>
 
   <!-- FEATURES ============================================== -->
   {product.features && product.features.length > 0 && (
-    <section class="py-20 md:py-32 border-b border-ink/10">
+    <section class="py-20 md:py-32 border-b border-ink/10 dots-bg">
       <div class="container-prose">
         <div class="grid md:grid-cols-12 gap-8 md:gap-16">
           <div class="md:col-span-4">
@@ -107,8 +119,9 @@ const relatedProducts = product.shipsWith
 
   <!-- SPECS ============================================== -->
   {product.specs && product.specs.length > 0 && (
-    <section class="py-20 md:py-32 bg-ink text-paper border-b border-ink/10 relative overflow-hidden">
+    <section class="py-20 md:py-32 bg-ink text-paper border-b border-ink/10 relative overflow-hidden mesh-dark">
       <div class="grain absolute inset-0 opacity-30 mix-blend-screen"></div>
+      <div class="grid-bg-dark absolute inset-0 opacity-50"></div>
       <div class="container-prose relative">
         <div class="grid md:grid-cols-12 gap-8 md:gap-16">
           <div class="md:col-span-4">
@@ -142,16 +155,25 @@ const relatedProducts = product.shipsWith
         </h2>
         <div class="grid md:grid-cols-2 gap-6">
           {relatedProducts.map((p) => p && (
-            <a href={`/products/${p.slug}`} class="card group block p-8">
-              <div class="text-eyebrow text-ember mb-4">{p.type}</div>
-              <h3 class="font-display text-3xl tracking-tighter mb-2">{p.name}</h3>
-              <p class="text-sm text-ink/60 mb-6">{p.tagline}</p>
-              <span class="text-sm text-ink/70 group-hover:text-ember transition-colors flex items-center gap-1.5">
-                Learn more
-                <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
-                  <path d="M5 12h14M13 5l7 7-7 7" stroke-linecap="round" stroke-linejoin="round" />
-                </svg>
-              </span>
+            <a href={`/products/${p.slug}`} class="card group block">
+              <MediaFrame
+                src={p.image}
+                label={p.name}
+                aspectClass="aspect-[16/9]"
+                category="product"
+                class="border-b border-ink/10"
+              />
+              <div class="p-8">
+                <div class="text-eyebrow text-ember mb-4">{p.type}</div>
+                <h3 class="font-display text-3xl tracking-tighter mb-2">{p.name}</h3>
+                <p class="text-sm text-ink/60 mb-6">{p.tagline}</p>
+                <span class="text-sm text-ink/70 group-hover:text-ember transition-colors flex items-center gap-1.5">
+                  Learn more
+                  <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                    <path d="M5 12h14M13 5l7 7-7 7" stroke-linecap="round" stroke-linejoin="round" />
+                  </svg>
+                </span>
+              </div>
             </a>
           ))}
         </div>
@@ -160,8 +182,9 @@ const relatedProducts = product.shipsWith
   )}
 
   <!-- CTA ============================================== -->
-  <section class="py-20 md:py-32">
-    <div class="container-prose">
+  <section class="py-20 md:py-32 mesh-warm relative overflow-hidden">
+    <div class="grain absolute inset-0 opacity-30"></div>
+    <div class="container-prose relative">
       <div class="grid md:grid-cols-2 gap-8 md:gap-16 items-end">
         <div>
           <div class="text-eyebrow text-ember mb-4">

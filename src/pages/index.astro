@@ -2,6 +2,8 @@
 import BaseLayout from '@layouts/BaseLayout.astro';
 import SuiteCard from '@components/SuiteCard.astro';
 import ProductCard from '@components/ProductCard.astro';
+import DashboardMockup from '@components/DashboardMockup.astro';
+import MediaFrame from '@components/MediaFrame.astro';
 import { suites, products, liveProducts } from '@data/catalog';
 
 const live = liveProducts();
@@ -13,11 +15,11 @@ const featuredComingSoon = products.filter((p) => ['homesteadhq', 'growguard', '
   description="HomesteadLabs builds practical AI for homesteads. CoopOS is the platform. Every product runs on it."
 >
   <!-- HERO ============================================== -->
-  <section class="relative overflow-hidden pt-20 md:pt-32 pb-24 md:pb-40 border-b border-ink/10">
+  <section class="relative overflow-hidden border-b border-ink/10 mesh-warm">
     <div class="grain absolute inset-0 opacity-40"></div>
 
-    <!-- Decorative side-rule with version stamp -->
-    <div class="absolute left-6 md:left-10 top-32 hidden md:flex flex-col items-center gap-3">
+    <!-- Side rule with version stamp -->
+    <div class="absolute left-6 md:left-10 top-32 hidden md:flex flex-col items-center gap-3 z-10">
       <div class="w-px h-16 bg-ink/20"></div>
       <div class="text-eyebrow text-ink/40 [writing-mode:vertical-rl] rotate-180">
         v1.0.0 / 2026
@@ -25,85 +27,110 @@ const featuredComingSoon = products.filter((p) => ['homesteadhq', 'growguard', '
       <div class="w-px h-16 bg-ink/20"></div>
     </div>
 
-    <div class="container-prose relative">
-      <div class="max-w-5xl" data-stagger>
-        <div class="text-eyebrow text-ember mb-8 flex items-center gap-2">
-          <span class="inline-block w-2 h-2 bg-ember rounded-full animate-pulse"></span>
-          Now shipping — CoopOS v1.0
+    <div class="container-prose pt-20 md:pt-32 pb-20 md:pb-32 relative">
+      <div class="grid lg:grid-cols-12 gap-12 lg:gap-16 items-center">
+        <!-- Left: text -->
+        <div class="lg:col-span-6">
+          <div class="text-eyebrow text-ember mb-6 flex items-center gap-2">
+            <span class="inline-block w-2 h-2 bg-ember rounded-full animate-pulse"></span>
+            Now shipping — CoopOS v1.0
+          </div>
+
+          <h1 class="font-display text-[clamp(2.75rem,7vw,6rem)] leading-[0.92] tracking-tightest mb-8 text-ink">
+            Practical AI.<br />
+            <em class="not-italic">From the ground <span class="text-ember italic">up</span>.</em>
+          </h1>
+
+          <p class="text-body-lg max-w-xl text-ink/70 mb-10 leading-relaxed">
+            HomesteadLabs builds intelligent modules for the modern homestead.
+            Every product runs on CoopOS, our purpose-built platform for sensor
+            ingestion, model inference, and decision-making at the property scale.
+          </p>
+
+          <div class="flex flex-wrap gap-4 items-center">
+            <a href="/products/coopos" class="btn-primary">
+              Explore CoopOS
+              <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                <path d="M5 12h14M13 5l7 7-7 7" stroke-linecap="round" stroke-linejoin="round" />
+              </svg>
+            </a>
+            <a href="/suites" class="btn-outline">
+              View the catalog
+            </a>
+          </div>
         </div>
 
-        <h1 class="font-display text-[clamp(2.75rem,9vw,7.5rem)] leading-[0.92] tracking-tightest mb-8 text-ink">
-          Practical AI.<br />
-          <em class="not-italic relative">
-            From the ground
-            <span class="text-ember italic">up</span>.
-          </em>
-        </h1>
-
-        <p class="text-body-lg max-w-2xl text-ink/70 mb-10 leading-relaxed">
-          HomesteadLabs builds intelligent modules for the modern homestead.
-          Every product runs on <a href="/products/coopos" class="text-ink underline decoration-ember decoration-2 underline-offset-4 hover:text-ember transition-colors">CoopOS</a>,
-          our purpose-built platform for sensor ingestion, model inference,
-          and decision-making at the property scale.
-        </p>
-
-        <div class="flex flex-wrap gap-4 items-center">
-          <a href="/products/coopos" class="btn-primary">
-            Explore CoopOS
-            <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
-              <path d="M5 12h14M13 5l7 7-7 7" stroke-linecap="round" stroke-linejoin="round" />
-            </svg>
-          </a>
-          <a href="/suites" class="btn-outline">
-            View the catalog
-          </a>
+        <!-- Right: dashboard mockup -->
+        <div class="lg:col-span-6 relative">
+          <DashboardMockup />
         </div>
       </div>
     </div>
 
     <!-- Stats footer -->
-    <div class="container-prose relative mt-24 md:mt-32">
-      <div class="rule mb-8"></div>
+    <div class="container-prose pb-16 md:pb-24 relative">
+      <div class="rule mb-10"></div>
       <div class="grid grid-cols-2 md:grid-cols-4 gap-8 md:gap-12">
         <div>
-          <div class="font-display text-5xl md:text-6xl tracking-tighter text-ink leading-none">
-            12
-          </div>
-          <div class="text-sm text-ink/55 mt-3">
-            Products in the catalog
-          </div>
+          <div class="font-display text-5xl md:text-6xl tracking-tighter text-ink leading-none">12</div>
+          <div class="text-sm text-ink/55 mt-3">Products in the catalog</div>
         </div>
         <div>
-          <div class="font-display text-5xl md:text-6xl tracking-tighter text-ember leading-none">
-            04
-          </div>
-          <div class="text-sm text-ink/55 mt-3">
-            Suites under active development
-          </div>
+          <div class="font-display text-5xl md:text-6xl tracking-tighter text-ember leading-none">04</div>
+          <div class="text-sm text-ink/55 mt-3">Suites under active development</div>
         </div>
         <div>
-          <div class="font-display text-5xl md:text-6xl tracking-tighter text-ink leading-none">
-            100
-          </div>
-          <div class="text-sm text-ink/55 mt-3">
-            Acres under instrumentation
-          </div>
+          <div class="font-display text-5xl md:text-6xl tracking-tighter text-ink leading-none">100</div>
+          <div class="text-sm text-ink/55 mt-3">Acres under instrumentation</div>
         </div>
         <div>
-          <div class="font-display text-5xl md:text-6xl tracking-tighter text-ink leading-none">
-            01
-          </div>
-          <div class="text-sm text-ink/55 mt-3">
-            Junior Engineer / Lead Janitor / CEO
-          </div>
+          <div class="font-display text-5xl md:text-6xl tracking-tighter text-ink leading-none">01</div>
+          <div class="text-sm text-ink/55 mt-3">Junior Engineer / Lead Janitor / CEO</div>
         </div>
       </div>
     </div>
   </section>
 
-  <!-- THE SUITES ============================================== -->
-  <section class="py-24 md:py-32 border-b border-ink/10">
-    <div class="container-prose">
+  <!-- TICKER ============================================== -->
+  <section class="bg-ink text-paper py-5 overflow-hidden border-b border-ink relative">
+    <div class="flex marquee whitespace-nowrap">
+      {[...Array(2)].map(() => (
+        <div class="flex items-center gap-12 pr-12 shrink-0">
+          <span class="text-eyebrow text-ember">Now Shipping</span>
+          <span class="text-eyebrow text-paper/60">CoopOS v1.0</span>
+          <span class="text-eyebrow text-paper/30">·</span>
+          <span class="text-eyebrow text-paper/60">CoopCam</span>
+          <span class="text-eyebrow text-paper/30">·</span>
+          <span class="text-eyebrow text-paper/60">EggWatch</span>
+          <span class="text-eyebrow text-paper/30">·</span>
+          <span class="text-eyebrow text-paper/60">PeckPerformance</span>
+          <span class="text-eyebrow text-ember">In Development</span>
+          <span class="text-eyebrow text-paper/60">HomesteadHQ</span>
+          <span class="text-eyebrow text-paper/30">·</span>
+          <span class="text-eyebrow text-paper/60">GrowGuard</span>
+          <span class="text-eyebrow text-paper/30">·</span>
+          <span class="text-eyebrow text-paper/60">WeatherWatch</span>
+          <span class="text-eyebrow text-paper/30">·</span>
+          <span class="text-eyebrow text-paper/60">CanopyControl</span>
+          <span class="text-eyebrow text-paper/30">·</span>
+          <span class="text-eyebrow text-paper/60">TheDoorMan</span>
+          <span class="text-eyebrow text-paper/30">·</span>
+          <span class="text-eyebrow text-paper/60">TrailScout</span>
+          <span class="text-eyebrow text-paper/30">·</span>
+          <span class="text-eyebrow text-paper/60">DriveWatch</span>
+          <span class="text-eyebrow text-paper/30">·</span>
+          <span class="text-eyebrow text-paper/60">CoopAir</span>
+          <span class="text-eyebrow text-paper/30">·</span>
+          <span class="text-eyebrow text-paper/60">PondPulse</span>
+          <span class="text-eyebrow text-paper/30">·</span>
+        </div>
+      ))}
+    </div>
+  </section>
+
+  <!-- SUITES ============================================== -->
+  <section class="py-24 md:py-32 border-b border-ink/10 mesh-subtle relative">
+    <div class="container-prose relative">
       <div class="grid md:grid-cols-12 gap-8 md:gap-16 mb-16 md:mb-20">
         <div class="md:col-span-4">
           <div class="text-eyebrow text-ember mb-4">The Suites</div>
@@ -154,7 +181,7 @@ const featuredComingSoon = products.filter((p) => ['homesteadhq', 'growguard', '
     </div>
   </section>
 
-  <!-- ROADMAP / COMING SOON ============================================== -->
+  <!-- ROADMAP ============================================== -->
   <section class="py-24 md:py-32 border-b border-ink/10">
     <div class="container-prose">
       <div class="grid md:grid-cols-12 gap-8 md:gap-16 mb-16 md:mb-20">
@@ -186,35 +213,50 @@ const featuredComingSoon = products.filter((p) => ['homesteadhq', 'growguard', '
   </section>
 
   <!-- FOUNDING THESIS ============================================== -->
-  <section class="py-24 md:py-40 bg-ink text-paper relative overflow-hidden">
+  <section class="py-24 md:py-40 bg-ink text-paper relative overflow-hidden mesh-dark">
     <div class="grain absolute inset-0 opacity-30 mix-blend-screen"></div>
+    <div class="grid-bg-dark absolute inset-0 opacity-50"></div>
+
     <div class="container-prose relative">
-      <div class="max-w-4xl">
-        <div class="text-eyebrow text-ember mb-8">A note from leadership</div>
-        <p class="font-display text-3xl md:text-5xl leading-[1.15] tracking-tighter text-paper">
-          A coop is a workforce.
-          <span class="text-ember italic">A garden is a process.</span>
-          A property is an organization.
-          We are the software layer that finally treats them that way.
-        </p>
-        <div class="mt-12 flex items-center gap-4">
-          <div class="w-10 h-10 rounded-full bg-ember/20 border border-ember/40 flex items-center justify-center">
-            <span class="font-mono text-xs text-ember">BC</span>
-          </div>
-          <div>
-            <div class="text-sm font-medium text-paper">Brad Conlin</div>
-            <div class="text-xs text-paper/50 mt-0.5 font-mono">
-              Jr. Engineer / Lead Janitor / CEO
+      <div class="grid md:grid-cols-12 gap-12 items-center">
+        <div class="md:col-span-7">
+          <div class="text-eyebrow text-ember mb-8">A note from leadership</div>
+          <p class="font-display text-3xl md:text-5xl leading-[1.15] tracking-tighter text-paper">
+            A coop is a workforce.
+            <span class="text-ember italic">A garden is a process.</span>
+            A property is an organization.
+            We are the software layer that finally treats them that way.
+          </p>
+          <div class="mt-12 flex items-center gap-4">
+            <div class="w-10 h-10 rounded-full bg-ember/20 border border-ember/40 flex items-center justify-center">
+              <span class="font-mono text-xs text-ember">BC</span>
+            </div>
+            <div>
+              <div class="text-sm font-medium text-paper">Brad Conlin</div>
+              <div class="text-xs text-paper/50 mt-0.5 font-mono">
+                Jr. Engineer / Lead Janitor / CEO
+              </div>
             </div>
           </div>
+        </div>
+
+        <div class="md:col-span-5">
+          <MediaFrame
+            src="brad-portrait.jpg"
+            label="Founder"
+            aspectClass="aspect-[3/4]"
+            category="team"
+            class="border border-paper/10"
+          />
         </div>
       </div>
     </div>
   </section>
 
   <!-- FINAL CTA ============================================== -->
-  <section class="py-24 md:py-32">
-    <div class="container-prose">
+  <section class="py-24 md:py-32 mesh-warm relative overflow-hidden">
+    <div class="grain absolute inset-0 opacity-30"></div>
+    <div class="container-prose relative">
       <div class="grid md:grid-cols-2 gap-12 md:gap-16 items-end">
         <div>
           <div class="text-eyebrow text-ember mb-4">Watch it ship</div>

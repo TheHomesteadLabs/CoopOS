@@ -1,6 +1,7 @@
 ---
 import type { Suite } from '@data/catalog';
 import { products as allProducts } from '@data/catalog';
+import MediaFrame from './MediaFrame.astro';
 
 export interface Props {
   suite: Suite;
@@ -13,40 +14,56 @@ const liveCount = modules.filter((m) => m.status === 'live').length;
 
 <a
   href={`/suites/${suite.slug}`}
-  class="card group block p-8 md:p-10 hover:transform-none"
+  class="card group block"
 >
-  <div class="flex items-center justify-between mb-8">
-    <div class="text-eyebrow text-ember">Suite</div>
-    <div class="text-xs font-mono text-ink/40">
-      {liveCount}/{modules.length} Modules Live
+  <!-- Image with accent overlay -->
+  <div class="relative">
+    <MediaFrame
+      src={suite.image}
+      label={suite.name}
+      aspectClass="aspect-[16/9]"
+      category="suite"
+    />
+    <!-- Accent gradient overlay -->
+    <div
+      class="absolute inset-0 opacity-30 mix-blend-multiply"
+      style={`background: linear-gradient(135deg, ${suite.accent}40 0%, transparent 60%);`}
+    ></div>
+    <!-- Suite name overlay -->
+    <div class="absolute bottom-0 left-0 right-0 p-6 md:p-8 bg-gradient-to-t from-ink/80 to-transparent">
+      <div class="text-eyebrow text-paper/70 mb-1">Suite</div>
+      <h3 class="font-display text-4xl md:text-5xl tracking-tighter text-paper leading-[1]">
+        {suite.name}
+      </h3>
     </div>
   </div>
 
-  <h3 class="font-display text-4xl md:text-5xl tracking-tighter mb-4 leading-[1]">
-    {suite.name}
-  </h3>
+  <!-- Body -->
+  <div class="p-6 md:p-8">
+    <p class="text-base text-ink/70 leading-relaxed mb-6 max-w-md">
+      {suite.tagline}
+    </p>
 
-  <p class="text-base text-ink/70 leading-relaxed mb-8 max-w-md">
-    {suite.tagline}
-  </p>
+    <div class="flex flex-wrap gap-2 mb-6">
+      {modules.map((m) => (
+        <span class:list={[
+          'text-xs px-3 py-1 rounded-full border',
+          m.status === 'live'
+            ? 'border-ember/30 text-ember bg-ember/5'
+            : 'border-ink/15 text-ink/55'
+        ]}>
+          {m.name}
+        </span>
+      ))}
+    </div>
 
-  <div class="flex flex-wrap gap-2">
-    {modules.map((m) => (
-      <span class:list={[
-        'text-xs px-3 py-1 rounded-full border',
-        m.status === 'live'
-          ? 'border-ember/30 text-ember bg-ember/5'
-          : 'border-ink/15 text-ink/55'
-      ]}>
-        {m.name}
+    <div class="pt-6 border-t border-ink/10 flex items-center justify-between">
+      <span class="text-xs font-mono text-ink/40">
+        {liveCount}/{modules.length} MODULES LIVE
       </span>
-    ))}
-  </div>
-
-  <div class="mt-10 pt-6 border-t border-ink/10 flex items-center justify-between">
-    <span class="text-sm text-ink/50">Explore the suite</span>
-    <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" class="text-ink/40 group-hover:text-ember transition-colors">
-      <path d="M5 12h14M13 5l7 7-7 7" stroke-linecap="round" stroke-linejoin="round" />
-    </svg>
+      <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" class="text-ink/40 group-hover:text-ember transition-colors">
+        <path d="M5 12h14M13 5l7 7-7 7" stroke-linecap="round" stroke-linejoin="round" />
+      </svg>
+    </div>
   </div>
 </a>

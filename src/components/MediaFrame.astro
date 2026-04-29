@@ -1,0 +1,41 @@
+---
+// MediaFrame — wraps an image with elegant fallback to a designed placeholder.
+// If `src` is provided AND the image file exists at /public/images/<src>, it shows.
+// Otherwise, an elegant gradient placeholder appears with the label.
+
+export interface Props {
+  src?: string;
+  alt?: string;
+  label: string; // e.g. "CoopCam", "PeckPerformance" — shown if no image
+  aspectClass?: string; // e.g. "aspect-[4/3]" or "aspect-square"
+  category?: 'product' | 'suite' | 'team' | 'atmosphere' | 'episode';
+  class?: string;
+}
+
+const {
+  src,
+  alt = '',
+  label,
+  aspectClass = 'aspect-[4/3]',
+  category = 'product',
+  class: className = '',
+} = Astro.props;
+
+const fullSrc = src ? `/images/${category}s/${src}` : null;
+---
+
+<div class:list={['relative overflow-hidden', aspectClass, className]}>
+  {fullSrc ? (
+    <img
+      src={fullSrc}
+      alt={alt || label}
+      class="w-full h-full object-cover"
+      loading="lazy"
+      onerror="this.style.display='none'; this.parentElement.classList.add('img-fallback-active');"
+    />
+  ) : (
+    <div class="img-placeholder absolute inset-0" data-label={label}></div>
+  )}
+  <!-- Fallback shown if image fails to load -->
+  <div class="img-placeholder absolute inset-0 hidden [.img-fallback-active_&]:block" data-label={label}></div>
+</div>
