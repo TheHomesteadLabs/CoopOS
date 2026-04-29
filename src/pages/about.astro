@@ -1,0 +1,161 @@
+---
+import BaseLayout from '@layouts/BaseLayout.astro';
+---
+
+<BaseLayout
+  title="About — HomesteadLabs"
+  description="HomesteadLabs is a Canadian software company headquartered in Tatlock, Ontario."
+>
+  <section class="py-20 md:py-32 border-b border-ink/10 relative overflow-hidden">
+    <div class="grain absolute inset-0 opacity-40"></div>
+    <div class="container-prose relative">
+      <div class="text-eyebrow text-ember mb-6">About</div>
+      <h1 class="font-display text-6xl md:text-8xl tracking-tightest leading-[0.92] mb-12 max-w-4xl">
+        A software company<br />in the woods.
+      </h1>
+
+      <div class="grid md:grid-cols-12 gap-8 md:gap-16">
+        <div class="md:col-span-7 space-y-6 text-body-lg text-ink/75 leading-relaxed">
+          <p>
+            HomesteadLabs is a Canadian software company headquartered on a hundred
+            acres in Tatlock, Ontario. We build modules — software, hardware, and
+            sensors — that turn ordinary homesteads into observable, measurable,
+            and increasingly intelligent operations.
+          </p>
+          <p>
+            Every product we make runs on <a href="/products/coopos" class="text-ink underline decoration-ember decoration-2 underline-offset-4 hover:text-ember transition-colors">CoopOS</a>,
+            our purpose-built operating system. CoopOS is the platform.
+            HomesteadHQ is the dashboard. The suites are the org chart.
+          </p>
+          <p>
+            We are a small team. Our founder writes the code, runs the cameras,
+            answers the support email, and presents the quarterly review to the
+            chickens. Marketing is also small. HR is satisfied.
+          </p>
+          <p>
+            We ship modules on YouTube first because we believe the build is the
+            product, and the video is the documentation.
+          </p>
+        </div>
+
+        <aside class="md:col-span-4 md:col-start-9">
+          <div class="card p-8 sticky top-24">
+            <div class="text-eyebrow text-ember mb-4">Company facts</div>
+            <dl class="divide-y divide-ink/10">
+              <div class="py-3 grid grid-cols-2 gap-2">
+                <dt class="text-eyebrow text-ink/40">Founded</dt>
+                <dd class="text-sm font-mono">2026</dd>
+              </div>
+              <div class="py-3 grid grid-cols-2 gap-2">
+                <dt class="text-eyebrow text-ink/40">HQ</dt>
+                <dd class="text-sm font-mono">Tatlock, ON</dd>
+              </div>
+              <div class="py-3 grid grid-cols-2 gap-2">
+                <dt class="text-eyebrow text-ink/40">Headcount</dt>
+                <dd class="text-sm font-mono">1 + flock</dd>
+              </div>
+              <div class="py-3 grid grid-cols-2 gap-2">
+                <dt class="text-eyebrow text-ink/40">Acres</dt>
+                <dd class="text-sm font-mono">100</dd>
+              </div>
+              <div class="py-3 grid grid-cols-2 gap-2">
+                <dt class="text-eyebrow text-ink/40">Funding</dt>
+                <dd class="text-sm font-mono">Bootstrapped</dd>
+              </div>
+              <div class="py-3 grid grid-cols-2 gap-2">
+                <dt class="text-eyebrow text-ink/40">Stage</dt>
+                <dd class="text-sm font-mono">Pre-revenue</dd>
+              </div>
+            </dl>
+          </div>
+        </aside>
+      </div>
+    </div>
+  </section>
+
+  <!-- LEADERSHIP -->
+  <section class="py-20 md:py-32 border-b border-ink/10 bg-paper-warm relative overflow-hidden">
+    <div class="grain absolute inset-0 opacity-30"></div>
+    <div class="container-prose relative">
+      <div class="text-eyebrow text-ember mb-12">Leadership</div>
+      <div class="grid md:grid-cols-2 gap-12 md:gap-16">
+        <div>
+          <div class="aspect-square bg-ink/5 border border-ink/10 mb-6 relative overflow-hidden">
+            <div class="absolute inset-0 flex items-center justify-center">
+              <span class="font-display text-9xl text-ink/15">BC</span>
+            </div>
+          </div>
+          <h3 class="font-display text-3xl tracking-tighter mb-1">Brad Conlin</h3>
+          <p class="text-eyebrow text-ember">Jr. Engineer / Lead Janitor / CEO</p>
+          <p class="mt-4 text-sm text-ink/65 leading-relaxed">
+            Founder. Writes the code. Holds the title.
+          </p>
+        </div>
+
+        <div class="space-y-8">
+          <div>
+            <h4 class="font-display text-2xl tracking-tighter mb-1">Mark</h4>
+            <p class="text-eyebrow text-ink/40 mb-2">APAC / Shanghai office</p>
+            <p class="text-sm text-ink/60 leading-relaxed">
+              Runs the regional team. Already shipping. Has not been seen.
+            </p>
+          </div>
+          <div>
+            <h4 class="font-display text-2xl tracking-tighter mb-1">Pam</h4>
+            <p class="text-eyebrow text-ink/40 mb-2">Human Resources</p>
+            <p class="text-sm text-ink/60 leading-relaxed">
+              Reviews wellness initiatives. Approves footers.
+            </p>
+          </div>
+          <div>
+            <h4 class="font-display text-2xl tracking-tighter mb-1">Susan</h4>
+            <p class="text-eyebrow text-ink/40 mb-2">Marketing</p>
+            <p class="text-sm text-ink/60 leading-relaxed">
+              Names the products. Owns the disclaimer text.
+            </p>
+          </div>
+          <div>
+            <h4 class="font-display text-2xl tracking-tighter text-ink/40 mb-1">Corporate</h4>
+            <p class="text-eyebrow text-ink/30 mb-2">Leadership</p>
+            <p class="text-sm text-ink/40 leading-relaxed italic">
+              Communicates by text message.
+            </p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- VALUES -->
+  <section class="py-20 md:py-32">
+    <div class="container-prose">
+      <div class="text-eyebrow text-ember mb-8">Operating principles</div>
+      <div class="grid md:grid-cols-3 gap-8 md:gap-12">
+        <div>
+          <div class="font-display text-6xl text-ember leading-none mb-4">01</div>
+          <h3 class="font-display text-2xl tracking-tighter mb-3">Real engineering</h3>
+          <p class="text-sm text-ink/65 leading-relaxed">
+            Every system we build is built. Real hardware, real failures, real
+            footage. We do not fake the engineering and we do not hide it.
+          </p>
+        </div>
+        <div>
+          <div class="font-display text-6xl text-ember leading-none mb-4">02</div>
+          <h3 class="font-display text-2xl tracking-tighter mb-3">Sensors first</h3>
+          <p class="text-sm text-ink/65 leading-relaxed">
+            We start from what can be measured, not from what we want to demo.
+            Every module begins with a sensor and ends with a decision.
+          </p>
+        </div>
+        <div>
+          <div class="font-display text-6xl text-ember leading-none mb-4">03</div>
+          <h3 class="font-display text-2xl tracking-tighter mb-3">One platform</h3>
+          <p class="text-sm text-ink/65 leading-relaxed">
+            CoopOS is the unifying layer. Every module ships data into it.
+            HomesteadHQ ships data out. The architecture is the product.
+          </p>
+        </div>
+      </div>
+    </div>
+  </section>
+</BaseLayout>

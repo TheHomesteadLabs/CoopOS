@@ -1,0 +1,78 @@
+---
+import { suites } from '@data/catalog';
+---
+
+<footer class="border-t border-ink/10 bg-paper-warm relative overflow-hidden">
+  <div class="grain absolute inset-0 opacity-30"></div>
+  <div class="container-prose py-16 md:py-24 relative">
+    <!-- Top: company statement -->
+    <div class="grid md:grid-cols-12 gap-12 md:gap-16 pb-12 border-b border-ink/10">
+      <div class="md:col-span-5">
+        <div class="text-eyebrow text-ember mb-4">Q2 2026</div>
+        <p class="font-display text-3xl md:text-4xl leading-[1.1] tracking-tighter text-ink/90">
+          Practical AI.<br />
+          From the ground up.
+        </p>
+        <p class="mt-6 text-sm text-ink/60 max-w-md leading-relaxed">
+          HomesteadLabs is a software company headquartered in Tatlock,
+          Ontario. We build modules that run on CoopOS, the operating system
+          for the modern homestead.
+        </p>
+      </div>
+
+      <div class="md:col-span-7 grid grid-cols-2 sm:grid-cols-4 gap-8">
+        <div>
+          <div class="text-eyebrow text-ink/40 mb-4">Platform</div>
+          <ul class="space-y-2.5 text-sm">
+            <li><a href="/products/coopos" class="text-ink/80 hover:text-ember transition-colors">CoopOS</a></li>
+            <li><a href="/products/homesteadhq" class="text-ink/80 hover:text-ember transition-colors">HomesteadHQ</a></li>
+          </ul>
+        </div>
+        <div>
+          <div class="text-eyebrow text-ink/40 mb-4">Suites</div>
+          <ul class="space-y-2.5 text-sm">
+            {suites.map((s) => (
+              <li><a href={`/suites/${s.slug}`} class="text-ink/80 hover:text-ember transition-colors">{s.name}</a></li>
+            ))}
+          </ul>
+        </div>
+        <div>
+          <div class="text-eyebrow text-ink/40 mb-4">Company</div>
+          <ul class="space-y-2.5 text-sm">
+            <li><a href="/about" class="text-ink/80 hover:text-ember transition-colors">About</a></li>
+            <li><a href="/careers" class="text-ink/80 hover:text-ember transition-colors">Careers</a></li>
+            <li><a href="/watch" class="text-ink/80 hover:text-ember transition-colors">Watch</a></li>
+            <li><a href="/patreon" class="text-ink/80 hover:text-ember transition-colors">Patreon</a></li>
+          </ul>
+        </div>
+        <div>
+          <div class="text-eyebrow text-ink/40 mb-4">Connect</div>
+          <ul class="space-y-2.5 text-sm">
+            <li><a href="https://youtube.com/@homesteadlabs" class="text-ink/80 hover:text-ember transition-colors">YouTube</a></li>
+            <li><a href="https://x.com/homesteadlabs" class="text-ink/80 hover:text-ember transition-colors">X / Twitter</a></li>
+            <li><a href="https://instagram.com/homesteadlabs" class="text-ink/80 hover:text-ember transition-colors">Instagram</a></li>
+            <li><a href="https://github.com/TheHomesteadLabs" class="text-ink/80 hover:text-ember transition-colors">GitHub</a></li>
+          </ul>
+        </div>
+      </div>
+    </div>
+
+    <!-- Bottom: legal + copyright + the corporate-parody legal text -->
+    <div class="pt-10 flex flex-col md:flex-row md:items-end justify-between gap-6">
+      <div class="text-xs text-ink/50 leading-relaxed font-mono max-w-2xl">
+        <p>
+          &copy; 2026 HomesteadLabs. All rights reserved. CoopOS, HomesteadHQ, PeckPerformance,
+          CoopCam, EggWatch, GrowGuard, WeatherWatch, TheDoorMan, CoopAir, CanopyControl,
+          TrailScout, DriveWatch, RunCam, and PondPulse are trademarks of HomesteadLabs.
+        </p>
+        <p class="mt-3 text-ink/40">
+          Performance metrics may vary. Not responsible for chickens identifying as managers.
+          Pam in HR has reviewed this footer.
+        </p>
+      </div>
+      <div class="text-xs text-ink/40 font-mono shrink-0">
+        v1.0.0 — Tatlock, ON
+      </div>
+    </div>
+  </div>
+</footer>

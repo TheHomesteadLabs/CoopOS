@@ -1,0 +1,192 @@
+---
+import BaseLayout from '@layouts/BaseLayout.astro';
+import { products, productBySlug, suiteBySlug } from '@data/catalog';
+
+export async function getStaticPaths() {
+  return products.map((product) => ({
+    params: { slug: product.slug },
+    props: { product },
+  }));
+}
+
+const { product } = Astro.props;
+const isLive = product.status === 'live';
+const suite = product.suite ? suiteBySlug(product.suite) : null;
+const relatedProducts = product.shipsWith
+  ? product.shipsWith.map((s) => productBySlug(s)).filter(Boolean)
+  : [];
+---
+
+<BaseLayout
+  title={`${product.name} — HomesteadLabs`}
+  description={product.tagline}
+>
+  <!-- HERO ============================================== -->
+  <section class:list={[
+    'relative overflow-hidden border-b border-ink/10',
+    isLive ? 'bg-paper' : 'bg-paper-warm',
+  ]}>
+    <div class="grain absolute inset-0 opacity-30"></div>
+    <div class="container-prose py-20 md:py-32 relative">
+      <!-- Breadcrumb -->
+      <nav class="mb-12 text-eyebrow flex items-center gap-3 text-ink/40">
+        <a href="/products" class="hover:text-ember transition-colors">Products</a>
+        <span>/</span>
+        {suite && (
+          <>
+            <a href={`/suites/${suite.slug}`} class="hover:text-ember transition-colors">{suite.name}</a>
+            <span>/</span>
+          </>
+        )}
+        <span class="text-ink">{product.name}</span>
+      </nav>
+
+      <div class="grid md:grid-cols-12 gap-8 md:gap-16 items-end">
+        <div class="md:col-span-8">
+          <div class="flex items-center gap-3 mb-8">
+            <div class:list={['pill', isLive ? 'pill-live' : 'pill-soon']}>
+              {isLive ? 'Available now' : 'Coming soon'}
+            </div>
+            {product.episode && (
+              <div class="text-eyebrow text-ink/40">
+                Episode {String(product.episode).padStart(2, '0')}
+              </div>
+            )}
+            <div class="text-eyebrow text-ink/40">
+              {product.type}
+            </div>
+          </div>
+
+          <h1 class="font-display text-6xl md:text-8xl tracking-tightest leading-[0.92] mb-6">
+            {product.name}
+          </h1>
+
+          <p class="font-display italic text-2xl md:text-3xl text-ember leading-snug max-w-3xl">
+            {product.tagline}
+          </p>
+        </div>
+
+        <div class="md:col-span-4 md:pt-2">
+          <p class="text-body-lg text-ink/75 leading-relaxed">
+            {product.description}
+          </p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- FEATURES ============================================== -->
+  {product.features && product.features.length > 0 && (
+    <section class="py-20 md:py-32 border-b border-ink/10">
+      <div class="container-prose">
+        <div class="grid md:grid-cols-12 gap-8 md:gap-16">
+          <div class="md:col-span-4">
+            <div class="text-eyebrow text-ember mb-4">Capabilities</div>
+            <h2 class="font-display text-4xl md:text-5xl tracking-tighter leading-[1]">
+              What it does.
+            </h2>
+          </div>
+          <div class="md:col-span-7 md:col-start-6">
+            <ul class="space-y-6">
+              {product.features.map((feature, i) => (
+                <li class="flex gap-6 pb-6 border-b border-ink/10 last:border-0">
+                  <span class="font-mono text-xs text-ember/70 mt-1 shrink-0">
+                    {String(i + 1).padStart(2, '0')}
+                  </span>
+                  <span class="text-lg text-ink/80 leading-snug">
+                    {feature}
+                  </span>
+                </li>
+              ))}
+            </ul>
+          </div>
+        </div>
+      </div>
+    </section>
+  )}
+
+  <!-- SPECS ============================================== -->
+  {product.specs && product.specs.length > 0 && (
+    <section class="py-20 md:py-32 bg-ink text-paper border-b border-ink/10 relative overflow-hidden">
+      <div class="grain absolute inset-0 opacity-30 mix-blend-screen"></div>
+      <div class="container-prose relative">
+        <div class="grid md:grid-cols-12 gap-8 md:gap-16">
+          <div class="md:col-span-4">
+            <div class="text-eyebrow text-ember mb-4">Spec</div>
+            <h2 class="font-display text-4xl md:text-5xl tracking-tighter leading-[1] text-paper">
+              Hard numbers.
+            </h2>
+          </div>
+          <div class="md:col-span-7 md:col-start-6">
+            <dl class="divide-y divide-paper/15">
+              {product.specs.map((spec) => (
+                <div class="grid grid-cols-3 gap-4 py-5">
+                  <dt class="text-eyebrow text-paper/50 col-span-1">{spec.label}</dt>
+                  <dd class="text-paper/95 col-span-2 font-mono text-sm">{spec.value}</dd>
+                </div>
+              ))}
+            </dl>
+          </div>
+        </div>
+      </div>
+    </section>
+  )}
+
+  <!-- SHIPS WITH ============================================== -->
+  {relatedProducts.length > 0 && (
+    <section class="py-20 md:py-32 border-b border-ink/10">
+      <div class="container-prose">
+        <div class="text-eyebrow text-ember mb-4">Ships with</div>
+        <h2 class="font-display text-4xl md:text-5xl tracking-tighter leading-[1] mb-12 max-w-3xl">
+          Designed to work together.
+        </h2>
+        <div class="grid md:grid-cols-2 gap-6">
+          {relatedProducts.map((p) => p && (
+            <a href={`/products/${p.slug}`} class="card group block p-8">
+              <div class="text-eyebrow text-ember mb-4">{p.type}</div>
+              <h3 class="font-display text-3xl tracking-tighter mb-2">{p.name}</h3>
+              <p class="text-sm text-ink/60 mb-6">{p.tagline}</p>
+              <span class="text-sm text-ink/70 group-hover:text-ember transition-colors flex items-center gap-1.5">
+                Learn more
+                <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                  <path d="M5 12h14M13 5l7 7-7 7" stroke-linecap="round" stroke-linejoin="round" />
+                </svg>
+              </span>
+            </a>
+          ))}
+        </div>
+      </div>
+    </section>
+  )}
+
+  <!-- CTA ============================================== -->
+  <section class="py-20 md:py-32">
+    <div class="container-prose">
+      <div class="grid md:grid-cols-2 gap-8 md:gap-16 items-end">
+        <div>
+          <div class="text-eyebrow text-ember mb-4">
+            {isLive ? 'Watch the build' : 'On the roadmap'}
+          </div>
+          <h2 class="font-display text-4xl md:text-5xl tracking-tighter leading-[1]">
+            {isLive
+              ? `${product.name} ships in Episode ${product.episode || '?'}.`
+              : `${product.name} ships when its episode does.`}
+          </h2>
+          <p class="mt-6 text-body-lg text-ink/65 leading-relaxed max-w-md">
+            {isLive
+              ? 'Watch how it was built on YouTube. Then come back here for the spec.'
+              : 'Subscribe and you\'ll be there when it ships.'}
+          </p>
+        </div>
+        <div class="flex flex-col sm:flex-row gap-3 md:justify-end">
+          <a href="/watch" class="btn-primary">
+            Watch on YouTube
+          </a>
+          <a href="/patreon" class="btn-outline">
+            Get the long cut
+          </a>
+        </div>
+      </div>
+    </div>
+  </section>
+</BaseLayout>

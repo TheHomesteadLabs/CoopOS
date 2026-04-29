@@ -1,0 +1,247 @@
+@import url('https://fonts.googleapis.com/css2?family=Instrument+Serif:ital@0;1&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=JetBrains+Mono:ital,wght@0,400;0,500;0,600;1,400&display=swap');
+@import url('https://cdn.jsdelivr.net/npm/geist@1.3.1/dist/fonts/geist-sans/style.css');
+
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer base {
+  :root {
+    --color-ink: 10 10 10;
+    --color-paper: 250 250 247;
+    --color-ember: 194 65 12;
+  }
+
+  html {
+    font-family: 'Geist', -apple-system, BlinkMacSystemFont, sans-serif;
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+    text-rendering: optimizeLegibility;
+    background-color: rgb(var(--color-paper));
+    color: rgb(var(--color-ink));
+  }
+
+  body {
+    overflow-x: hidden;
+  }
+
+  /* Selection */
+  ::selection {
+    background-color: rgb(var(--color-ember));
+    color: rgb(var(--color-paper));
+  }
+
+  /* Scrollbar — subtle, branded */
+  ::-webkit-scrollbar {
+    width: 10px;
+    height: 10px;
+  }
+  ::-webkit-scrollbar-track {
+    background: transparent;
+  }
+  ::-webkit-scrollbar-thumb {
+    background: rgb(var(--color-ink) / 0.15);
+    border-radius: 6px;
+  }
+  ::-webkit-scrollbar-thumb:hover {
+    background: rgb(var(--color-ink) / 0.3);
+  }
+
+  /* Focus rings */
+  *:focus-visible {
+    outline: 2px solid rgb(var(--color-ember));
+    outline-offset: 3px;
+    border-radius: 2px;
+  }
+}
+
+@layer components {
+  /* Display headlines — Instrument Serif, very tight tracking */
+  .text-display {
+    font-family: 'Instrument Serif', ui-serif, Georgia, serif;
+    font-weight: 400;
+    letter-spacing: -0.04em;
+    line-height: 0.95;
+  }
+
+  /* Eyebrow — small, mono, uppercase */
+  .text-eyebrow {
+    font-family: 'JetBrains Mono', ui-monospace, monospace;
+    font-size: 0.6875rem;
+    font-weight: 500;
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+  }
+
+  /* Body large */
+  .text-body-lg {
+    font-size: 1.125rem;
+    line-height: 1.6;
+    letter-spacing: -0.011em;
+  }
+
+  /* Subtle ember underline on hover */
+  .link-underline {
+    position: relative;
+    display: inline-block;
+  }
+  .link-underline::after {
+    content: '';
+    position: absolute;
+    left: 0;
+    bottom: -2px;
+    width: 100%;
+    height: 1px;
+    background: currentColor;
+    transform-origin: right;
+    transform: scaleX(0);
+    transition: transform 0.4s cubic-bezier(0.16, 1, 0.3, 1);
+  }
+  .link-underline:hover::after {
+    transform-origin: left;
+    transform: scaleX(1);
+  }
+
+  /* Section dividers — thin rule */
+  .rule {
+    height: 1px;
+    background: rgb(var(--color-ink) / 0.12);
+    width: 100%;
+  }
+
+  /* Container — mirrors max-w-7xl with editorial gutters */
+  .container-prose {
+    max-width: 80rem;
+    margin-left: auto;
+    margin-right: auto;
+    padding-left: 1.5rem;
+    padding-right: 1.5rem;
+  }
+  @media (min-width: 768px) {
+    .container-prose {
+      padding-left: 2.5rem;
+      padding-right: 2.5rem;
+    }
+  }
+  @media (min-width: 1280px) {
+    .container-prose {
+      padding-left: 4rem;
+      padding-right: 4rem;
+    }
+  }
+
+  /* Cards — flat, with hover lift */
+  .card {
+    position: relative;
+    border: 1px solid rgb(var(--color-ink) / 0.1);
+    background: rgb(var(--color-paper));
+    transition: border-color 0.4s ease, transform 0.4s cubic-bezier(0.16, 1, 0.3, 1);
+  }
+  .card:hover {
+    border-color: rgb(var(--color-ink) / 0.3);
+  }
+
+  /* Button — primary */
+  .btn-primary {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.5rem;
+    padding: 0.875rem 1.5rem;
+    background: rgb(var(--color-ink));
+    color: rgb(var(--color-paper));
+    font-size: 0.875rem;
+    font-weight: 500;
+    letter-spacing: -0.01em;
+    transition: background 0.3s ease, transform 0.3s ease;
+  }
+  .btn-primary:hover {
+    background: rgb(var(--color-ember));
+  }
+
+  /* Button — outline */
+  .btn-outline {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.5rem;
+    padding: 0.875rem 1.5rem;
+    border: 1px solid rgb(var(--color-ink) / 0.2);
+    color: rgb(var(--color-ink));
+    font-size: 0.875rem;
+    font-weight: 500;
+    letter-spacing: -0.01em;
+    transition: all 0.3s ease;
+  }
+  .btn-outline:hover {
+    border-color: rgb(var(--color-ink));
+    background: rgb(var(--color-ink));
+    color: rgb(var(--color-paper));
+  }
+
+  /* Status pill — for "Available now" / "Coming soon" */
+  .pill {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.4rem;
+    padding: 0.25rem 0.625rem;
+    font-family: 'JetBrains Mono', ui-monospace, monospace;
+    font-size: 0.6875rem;
+    font-weight: 500;
+    letter-spacing: 0.06em;
+    text-transform: uppercase;
+    border-radius: 100px;
+    border: 1px solid rgb(var(--color-ink) / 0.15);
+  }
+  .pill-live {
+    border-color: rgb(var(--color-ember) / 0.3);
+    color: rgb(var(--color-ember));
+  }
+  .pill-live::before {
+    content: '';
+    width: 6px;
+    height: 6px;
+    background: rgb(var(--color-ember));
+    border-radius: 50%;
+    animation: pulse 2s infinite;
+  }
+  .pill-soon {
+    color: rgb(var(--color-ink) / 0.55);
+  }
+  .pill-soon::before {
+    content: '';
+    width: 6px;
+    height: 6px;
+    background: rgb(var(--color-ink) / 0.3);
+    border-radius: 50%;
+  }
+
+  @keyframes pulse {
+    0%, 100% { opacity: 1; }
+    50% { opacity: 0.5; }
+  }
+
+  /* Grain overlay — subtle texture for depth */
+  .grain::before {
+    content: '';
+    position: absolute;
+    inset: 0;
+    background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.85' numOctaves='2'/%3E%3CfeColorMatrix values='0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0.06 0'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E");
+    pointer-events: none;
+    opacity: 0.5;
+    mix-blend-mode: multiply;
+  }
+
+  /* Stagger children animations on parent reveal */
+  [data-stagger] > * {
+    opacity: 0;
+    animation: fadeUp 0.8s cubic-bezier(0.16, 1, 0.3, 1) forwards;
+  }
+  [data-stagger] > *:nth-child(1) { animation-delay: 0.05s; }
+  [data-stagger] > *:nth-child(2) { animation-delay: 0.15s; }
+  [data-stagger] > *:nth-child(3) { animation-delay: 0.25s; }
+  [data-stagger] > *:nth-child(4) { animation-delay: 0.35s; }
+  [data-stagger] > *:nth-child(5) { animation-delay: 0.45s; }
+  [data-stagger] > *:nth-child(6) { animation-delay: 0.55s; }
+  [data-stagger] > *:nth-child(7) { animation-delay: 0.65s; }
+  [data-stagger] > *:nth-child(8) { animation-delay: 0.75s; }
+}

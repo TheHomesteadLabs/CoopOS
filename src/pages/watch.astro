@@ -1,0 +1,162 @@
+---
+import BaseLayout from '@layouts/BaseLayout.astro';
+import { products } from '@data/catalog';
+
+const episodes = [
+  {
+    number: 1,
+    title: 'PeckPerformance',
+    products: ['CoopOS', 'CoopCam', 'EggWatch', 'PeckPerformance'],
+    suite: 'CoopOps',
+    runtime: '14–17 min',
+    status: 'In production',
+    summary: 'A multi-camera computer vision system that ranks the chickens by productivity. Then ranks Brad.',
+  },
+  {
+    number: 2,
+    title: 'GrowGuard',
+    products: ['GrowGuard'],
+    suite: 'VegeOps',
+    runtime: '12–15 min',
+    status: 'Planned',
+    summary: 'AI-driven drip irrigation. Soil moisture, solenoid valves, and a model that decides when to water.',
+  },
+  {
+    number: 3,
+    title: 'WeatherWatch',
+    products: ['WeatherWatch'],
+    suite: 'Standalone',
+    runtime: '14–17 min',
+    status: 'Planned',
+    summary: 'A DIY weather station that learns the property\'s microclimate and outpredicts the regional forecast.',
+  },
+  {
+    number: 4,
+    title: 'CanopyControl',
+    products: ['CanopyControl'],
+    suite: 'VegeOps',
+    runtime: '15–18 min',
+    status: 'Planned',
+    summary: 'A spectral sensor that sees plant stress before it shows. Then a motor that pulls shade cloth across the garden.',
+  },
+  {
+    number: 5,
+    title: 'TheDoorMan',
+    products: ['TheDoorMan'],
+    suite: 'CoopOps',
+    runtime: '14–17 min',
+    status: 'Planned',
+    summary: 'A coop door that closes when sundown is imminent AND the headcount matches AND no one is in the doorway.',
+  },
+  {
+    number: 6,
+    title: 'TrailScout',
+    products: ['TrailScout'],
+    suite: 'PerimeterOps',
+    runtime: '12–15 min',
+    status: 'Planned',
+    summary: 'Two ESP32-CAMs at the property edge. One AI. One hundred acres. A wildlife census builds itself.',
+  },
+  {
+    number: 7,
+    title: 'DriveWatch',
+    products: ['DriveWatch'],
+    suite: 'PerimeterOps',
+    runtime: '13–16 min',
+    status: 'Planned',
+    summary: 'mmWave radar plus a camera plus a classifier. Brad gets a text before anyone reaches the door.',
+  },
+  {
+    number: 8,
+    title: 'CoopAir',
+    products: ['CoopAir'],
+    suite: 'CoopOps',
+    runtime: '12–15 min',
+    status: 'Planned',
+    summary: 'Real-time air quality monitoring in the coop. Ammonia, CO₂, particulates. Pam from HR is involved.',
+  },
+  {
+    number: 9,
+    title: 'PondPulse',
+    products: ['PondPulse'],
+    suite: 'AquaOps',
+    runtime: '16–20 min',
+    status: 'Planned',
+    summary: 'A floating, solar-powered pond monitor. Anchored mid-water. Transmitting via LoRa. The flagship build.',
+  },
+  {
+    number: 10,
+    title: 'HomesteadHQ',
+    products: ['HomesteadHQ'],
+    suite: 'Flagship',
+    runtime: '15–20 min',
+    status: 'Planned',
+    summary: 'The unified dashboard arrives. Every module reports in. Brad presents to the board. Mark joins by video.',
+  },
+];
+---
+
+<BaseLayout
+  title="Watch — HomesteadLabs"
+  description="Episodes of HomesteadLabs on YouTube. Every product is a video."
+>
+  <section class="py-20 md:py-32 border-b border-ink/10 relative overflow-hidden">
+    <div class="grain absolute inset-0 opacity-40"></div>
+    <div class="container-prose relative">
+      <div class="text-eyebrow text-ember mb-6">Watch</div>
+      <h1 class="font-display text-6xl md:text-8xl tracking-tightest leading-[0.92] mb-8 max-w-4xl">
+        Every product<br />is a video.
+      </h1>
+      <p class="text-body-lg text-ink/70 max-w-2xl leading-relaxed mb-10">
+        HomesteadLabs ships modules on YouTube first. Every episode is a real
+        build, end-to-end — sensors, software, dashboard, payoff.
+        New episode every three to four weeks.
+      </p>
+      <a href="https://youtube.com/@homesteadlabs" class="btn-primary">
+        Subscribe on YouTube
+        <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+          <path d="M5 12h14M13 5l7 7-7 7" stroke-linecap="round" stroke-linejoin="round" />
+        </svg>
+      </a>
+    </div>
+  </section>
+
+  <!-- EPISODE LIST -->
+  <section class="py-20 md:py-24">
+    <div class="container-prose">
+      <div class="text-eyebrow text-ember mb-12">Season 01 — 10 episodes</div>
+
+      <ul class="divide-y divide-ink/10">
+        {episodes.map((ep) => (
+          <li class="group">
+            <article class="grid md:grid-cols-12 gap-6 md:gap-8 py-8 md:py-10 items-start">
+              <div class="md:col-span-1">
+                <div class="font-display text-5xl md:text-6xl tracking-tighter text-ink/15 group-hover:text-ember transition-colors">
+                  {String(ep.number).padStart(2, '0')}
+                </div>
+              </div>
+              <div class="md:col-span-7">
+                <div class="flex items-center gap-3 mb-3">
+                  <span class="text-eyebrow text-ember">{ep.suite}</span>
+                  <span class="text-eyebrow text-ink/30">·</span>
+                  <span class="text-eyebrow text-ink/40">{ep.runtime}</span>
+                </div>
+                <h3 class="font-display text-3xl md:text-4xl tracking-tighter leading-[1] mb-3">
+                  {ep.title}
+                </h3>
+                <p class="text-base text-ink/65 leading-relaxed max-w-2xl">
+                  {ep.summary}
+                </p>
+              </div>
+              <div class="md:col-span-3 md:col-start-10 flex md:justify-end">
+                <div class:list={['pill', ep.status === 'In production' ? 'pill-live' : 'pill-soon']}>
+                  {ep.status}
+                </div>
+              </div>
+            </article>
+          </li>
+        ))}
+      </ul>
+    </div>
+  </section>
+</BaseLayout>

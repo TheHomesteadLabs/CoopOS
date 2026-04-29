@@ -1,0 +1,52 @@
+---
+import type { Suite } from '@data/catalog';
+import { products as allProducts } from '@data/catalog';
+
+export interface Props {
+  suite: Suite;
+}
+
+const { suite } = Astro.props;
+const modules = allProducts.filter((p) => suite.modules.includes(p.slug));
+const liveCount = modules.filter((m) => m.status === 'live').length;
+---
+
+<a
+  href={`/suites/${suite.slug}`}
+  class="card group block p-8 md:p-10 hover:transform-none"
+>
+  <div class="flex items-center justify-between mb-8">
+    <div class="text-eyebrow text-ember">Suite</div>
+    <div class="text-xs font-mono text-ink/40">
+      {liveCount}/{modules.length} Modules Live
+    </div>
+  </div>
+
+  <h3 class="font-display text-4xl md:text-5xl tracking-tighter mb-4 leading-[1]">
+    {suite.name}
+  </h3>
+
+  <p class="text-base text-ink/70 leading-relaxed mb-8 max-w-md">
+    {suite.tagline}
+  </p>
+
+  <div class="flex flex-wrap gap-2">
+    {modules.map((m) => (
+      <span class:list={[
+        'text-xs px-3 py-1 rounded-full border',
+        m.status === 'live'
+          ? 'border-ember/30 text-ember bg-ember/5'
+          : 'border-ink/15 text-ink/55'
+      ]}>
+        {m.name}
+      </span>
+    ))}
+  </div>
+
+  <div class="mt-10 pt-6 border-t border-ink/10 flex items-center justify-between">
+    <span class="text-sm text-ink/50">Explore the suite</span>
+    <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" class="text-ink/40 group-hover:text-ember transition-colors">
+      <path d="M5 12h14M13 5l7 7-7 7" stroke-linecap="round" stroke-linejoin="round" />
+    </svg>
+  </div>
+</a>

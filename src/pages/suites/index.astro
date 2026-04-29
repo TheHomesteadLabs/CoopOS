@@ -1,0 +1,32 @@
+---
+import BaseLayout from '@layouts/BaseLayout.astro';
+import SuiteCard from '@components/SuiteCard.astro';
+import { suites } from '@data/catalog';
+---
+
+<BaseLayout
+  title="Suites — HomesteadLabs"
+  description="Four suites — CoopOps, VegeOps, PerimeterOps, AquaOps — every one running on CoopOS."
+>
+  <section class="py-20 md:py-32 border-b border-ink/10 relative overflow-hidden">
+    <div class="grain absolute inset-0 opacity-40"></div>
+    <div class="container-prose relative">
+      <div class="text-eyebrow text-ember mb-6">The suites</div>
+      <h1 class="font-display text-6xl md:text-8xl tracking-tightest leading-[0.92] mb-8 max-w-4xl">
+        Organized<br />by domain.
+      </h1>
+      <p class="text-body-lg text-ink/70 max-w-2xl leading-relaxed">
+        Every product belongs to a suite. Each suite is a domain — coop, garden,
+        perimeter, water — and every domain runs on the same operating system.
+      </p>
+    </div>
+  </section>
+
+  <section class="py-20 md:py-32">
+    <div class="container-prose">
+      <div class="grid md:grid-cols-2 gap-6 md:gap-8">
+        {suites.map((s) => <SuiteCard suite={s} />)}
+      </div>
+    </div>
+  </section>
+</BaseLayout>

@@ -1,0 +1,76 @@
+---
+import BaseLayout from '@layouts/BaseLayout.astro';
+import ProductCard from '@components/ProductCard.astro';
+import { products, suites, liveProducts, comingSoonProducts } from '@data/catalog';
+
+const live = liveProducts();
+const soon = comingSoonProducts();
+const platformProducts = products.filter((p) => p.suite === null && p.type !== 'sensor');
+---
+
+<BaseLayout
+  title="Products — HomesteadLabs"
+  description="The complete HomesteadLabs catalog. CoopOS, HomesteadHQ, and 12 modules across four suites."
+>
+  <!-- HERO -->
+  <section class="py-20 md:py-32 border-b border-ink/10 relative overflow-hidden">
+    <div class="grain absolute inset-0 opacity-40"></div>
+    <div class="container-prose relative">
+      <div class="text-eyebrow text-ember mb-6">The catalog</div>
+      <h1 class="font-display text-6xl md:text-8xl tracking-tightest leading-[0.92] mb-8 max-w-4xl">
+        Every module<br />HomesteadLabs makes.
+      </h1>
+      <p class="text-body-lg text-ink/70 max-w-2xl leading-relaxed">
+        The platform, the dashboard, and twelve modules across four suites.
+        Three are shipping. Nine are on the roadmap. CoopOS is what holds it all together.
+      </p>
+    </div>
+  </section>
+
+  <!-- PLATFORM -->
+  <section class="py-20 md:py-24 border-b border-ink/10">
+    <div class="container-prose">
+      <div class="text-eyebrow text-ember mb-8">Platform</div>
+      <div class="grid md:grid-cols-2 gap-6">
+        {platformProducts.map((p) => <ProductCard product={p} />)}
+      </div>
+    </div>
+  </section>
+
+  <!-- SUITES -->
+  {suites.map((suite) => {
+    const suiteProducts = products.filter((p) => p.suite === suite.slug);
+    const liveInSuite = suiteProducts.filter((p) => p.status === 'live').length;
+    return (
+      <section class="py-20 md:py-24 border-b border-ink/10">
+        <div class="container-prose">
+          <div class="flex items-end justify-between mb-10">
+            <div>
+              <div class="text-eyebrow text-ember mb-2">{suite.name}</div>
+              <h2 class="font-display text-4xl md:text-5xl tracking-tighter">{suite.tagline}</h2>
+            </div>
+            <a href={`/suites/${suite.slug}`} class="hidden md:flex text-sm text-ink/60 hover:text-ember transition-colors items-center gap-2 link-underline">
+              Suite overview
+              <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5">
+                <path d="M5 12h14M13 5l7 7-7 7" stroke-linecap="round" stroke-linejoin="round" />
+              </svg>
+            </a>
+          </div>
+          <div class="grid md:grid-cols-2 lg:grid-cols-3 gap-6">
+            {suiteProducts.map((p) => <ProductCard product={p} />)}
+          </div>
+        </div>
+      </section>
+    );
+  })}
+
+  <!-- STANDALONE -->
+  <section class="py-20 md:py-24">
+    <div class="container-prose">
+      <div class="text-eyebrow text-ember mb-8">Standalone</div>
+      <div class="grid md:grid-cols-2 gap-6 max-w-4xl">
+        {products.filter((p) => p.suite === null && p.type === 'sensor').map((p) => <ProductCard product={p} />)}
+      </div>
+    </div>
+  </section>
+</BaseLayout>

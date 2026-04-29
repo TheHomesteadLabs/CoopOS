@@ -1,0 +1,243 @@
+---
+import BaseLayout from '@layouts/BaseLayout.astro';
+import SuiteCard from '@components/SuiteCard.astro';
+import ProductCard from '@components/ProductCard.astro';
+import { suites, products, liveProducts } from '@data/catalog';
+
+const live = liveProducts();
+const featuredComingSoon = products.filter((p) => ['homesteadhq', 'growguard', 'weatherwatch', 'pondpulse'].includes(p.slug));
+---
+
+<BaseLayout
+  title="HomesteadLabs — Practical AI. From the ground up."
+  description="HomesteadLabs builds practical AI for homesteads. CoopOS is the platform. Every product runs on it."
+>
+  <!-- HERO ============================================== -->
+  <section class="relative overflow-hidden pt-20 md:pt-32 pb-24 md:pb-40 border-b border-ink/10">
+    <div class="grain absolute inset-0 opacity-40"></div>
+
+    <!-- Decorative side-rule with version stamp -->
+    <div class="absolute left-6 md:left-10 top-32 hidden md:flex flex-col items-center gap-3">
+      <div class="w-px h-16 bg-ink/20"></div>
+      <div class="text-eyebrow text-ink/40 [writing-mode:vertical-rl] rotate-180">
+        v1.0.0 / 2026
+      </div>
+      <div class="w-px h-16 bg-ink/20"></div>
+    </div>
+
+    <div class="container-prose relative">
+      <div class="max-w-5xl" data-stagger>
+        <div class="text-eyebrow text-ember mb-8 flex items-center gap-2">
+          <span class="inline-block w-2 h-2 bg-ember rounded-full animate-pulse"></span>
+          Now shipping — CoopOS v1.0
+        </div>
+
+        <h1 class="font-display text-[clamp(2.75rem,9vw,7.5rem)] leading-[0.92] tracking-tightest mb-8 text-ink">
+          Practical AI.<br />
+          <em class="not-italic relative">
+            From the ground
+            <span class="text-ember italic">up</span>.
+          </em>
+        </h1>
+
+        <p class="text-body-lg max-w-2xl text-ink/70 mb-10 leading-relaxed">
+          HomesteadLabs builds intelligent modules for the modern homestead.
+          Every product runs on <a href="/products/coopos" class="text-ink underline decoration-ember decoration-2 underline-offset-4 hover:text-ember transition-colors">CoopOS</a>,
+          our purpose-built platform for sensor ingestion, model inference,
+          and decision-making at the property scale.
+        </p>
+
+        <div class="flex flex-wrap gap-4 items-center">
+          <a href="/products/coopos" class="btn-primary">
+            Explore CoopOS
+            <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+              <path d="M5 12h14M13 5l7 7-7 7" stroke-linecap="round" stroke-linejoin="round" />
+            </svg>
+          </a>
+          <a href="/suites" class="btn-outline">
+            View the catalog
+          </a>
+        </div>
+      </div>
+    </div>
+
+    <!-- Stats footer -->
+    <div class="container-prose relative mt-24 md:mt-32">
+      <div class="rule mb-8"></div>
+      <div class="grid grid-cols-2 md:grid-cols-4 gap-8 md:gap-12">
+        <div>
+          <div class="font-display text-5xl md:text-6xl tracking-tighter text-ink leading-none">
+            12
+          </div>
+          <div class="text-sm text-ink/55 mt-3">
+            Products in the catalog
+          </div>
+        </div>
+        <div>
+          <div class="font-display text-5xl md:text-6xl tracking-tighter text-ember leading-none">
+            04
+          </div>
+          <div class="text-sm text-ink/55 mt-3">
+            Suites under active development
+          </div>
+        </div>
+        <div>
+          <div class="font-display text-5xl md:text-6xl tracking-tighter text-ink leading-none">
+            100
+          </div>
+          <div class="text-sm text-ink/55 mt-3">
+            Acres under instrumentation
+          </div>
+        </div>
+        <div>
+          <div class="font-display text-5xl md:text-6xl tracking-tighter text-ink leading-none">
+            01
+          </div>
+          <div class="text-sm text-ink/55 mt-3">
+            Junior Engineer / Lead Janitor / CEO
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- THE SUITES ============================================== -->
+  <section class="py-24 md:py-32 border-b border-ink/10">
+    <div class="container-prose">
+      <div class="grid md:grid-cols-12 gap-8 md:gap-16 mb-16 md:mb-20">
+        <div class="md:col-span-4">
+          <div class="text-eyebrow text-ember mb-4">The Suites</div>
+          <h2 class="font-display text-5xl md:text-6xl tracking-tighter leading-[0.95]">
+            Four suites.<br />One platform.
+          </h2>
+        </div>
+        <div class="md:col-span-7 md:col-start-6 md:pt-2">
+          <p class="text-body-lg text-ink/70 leading-relaxed">
+            Every HomesteadLabs product belongs to a suite, and every suite runs on CoopOS.
+            That's the whole architecture. Coop, garden, perimeter, water — different domains,
+            same operating system, one dashboard at the end.
+          </p>
+        </div>
+      </div>
+
+      <div class="grid md:grid-cols-2 gap-6 md:gap-8">
+        {suites.map((s) => <SuiteCard suite={s} />)}
+      </div>
+    </div>
+  </section>
+
+  <!-- LIVE PRODUCTS ============================================== -->
+  <section class="py-24 md:py-32 border-b border-ink/10 bg-paper-warm relative overflow-hidden">
+    <div class="grain absolute inset-0 opacity-30"></div>
+    <div class="container-prose relative">
+      <div class="flex items-end justify-between mb-12 md:mb-16">
+        <div>
+          <div class="text-eyebrow text-ember mb-4 flex items-center gap-2">
+            <span class="inline-block w-2 h-2 bg-ember rounded-full animate-pulse"></span>
+            Available now
+          </div>
+          <h2 class="font-display text-5xl md:text-6xl tracking-tighter leading-[0.95]">
+            Shipping in v1.0.
+          </h2>
+        </div>
+        <a href="/products" class="hidden md:inline-flex text-sm text-ink/60 hover:text-ember transition-colors items-center gap-2 link-underline">
+          View all products
+          <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5">
+            <path d="M5 12h14M13 5l7 7-7 7" stroke-linecap="round" stroke-linejoin="round" />
+          </svg>
+        </a>
+      </div>
+
+      <div class="grid md:grid-cols-2 lg:grid-cols-4 gap-6">
+        {live.map((p) => <ProductCard product={p} />)}
+      </div>
+    </div>
+  </section>
+
+  <!-- ROADMAP / COMING SOON ============================================== -->
+  <section class="py-24 md:py-32 border-b border-ink/10">
+    <div class="container-prose">
+      <div class="grid md:grid-cols-12 gap-8 md:gap-16 mb-16 md:mb-20">
+        <div class="md:col-span-5">
+          <div class="text-eyebrow text-ink/50 mb-4">Roadmap</div>
+          <h2 class="font-display text-5xl md:text-6xl tracking-tighter leading-[0.95]">
+            On the<br />board.
+          </h2>
+        </div>
+        <div class="md:col-span-6 md:col-start-7 md:pt-2">
+          <p class="text-body-lg text-ink/70 leading-relaxed">
+            Eight modules in active development across the four suites.
+            HomesteadHQ, the unified dashboard, ships when every module
+            it depends on does. Marketing has been informed.
+          </p>
+        </div>
+      </div>
+
+      <div class="grid md:grid-cols-2 lg:grid-cols-4 gap-6">
+        {featuredComingSoon.map((p) => <ProductCard product={p} />)}
+      </div>
+
+      <div class="mt-12 text-center">
+        <a href="/products" class="btn-outline">
+          See full catalog
+        </a>
+      </div>
+    </div>
+  </section>
+
+  <!-- FOUNDING THESIS ============================================== -->
+  <section class="py-24 md:py-40 bg-ink text-paper relative overflow-hidden">
+    <div class="grain absolute inset-0 opacity-30 mix-blend-screen"></div>
+    <div class="container-prose relative">
+      <div class="max-w-4xl">
+        <div class="text-eyebrow text-ember mb-8">A note from leadership</div>
+        <p class="font-display text-3xl md:text-5xl leading-[1.15] tracking-tighter text-paper">
+          A coop is a workforce.
+          <span class="text-ember italic">A garden is a process.</span>
+          A property is an organization.
+          We are the software layer that finally treats them that way.
+        </p>
+        <div class="mt-12 flex items-center gap-4">
+          <div class="w-10 h-10 rounded-full bg-ember/20 border border-ember/40 flex items-center justify-center">
+            <span class="font-mono text-xs text-ember">BC</span>
+          </div>
+          <div>
+            <div class="text-sm font-medium text-paper">Brad Conlin</div>
+            <div class="text-xs text-paper/50 mt-0.5 font-mono">
+              Jr. Engineer / Lead Janitor / CEO
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- FINAL CTA ============================================== -->
+  <section class="py-24 md:py-32">
+    <div class="container-prose">
+      <div class="grid md:grid-cols-2 gap-12 md:gap-16 items-end">
+        <div>
+          <div class="text-eyebrow text-ember mb-4">Watch it ship</div>
+          <h2 class="font-display text-5xl md:text-6xl tracking-tighter leading-[0.95]">
+            Every product<br />is a video.
+          </h2>
+          <p class="mt-8 text-body-lg text-ink/70 max-w-md leading-relaxed">
+            HomesteadLabs ships modules on YouTube first.
+            Subscribe to watch the build, then come back here for the spec.
+          </p>
+        </div>
+        <div class="flex flex-col sm:flex-row gap-4 md:justify-end">
+          <a href="https://youtube.com/@homesteadlabs" class="btn-primary">
+            Subscribe on YouTube
+            <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+              <path d="M5 12h14M13 5l7 7-7 7" stroke-linecap="round" stroke-linejoin="round" />
+            </svg>
+          </a>
+          <a href="/patreon" class="btn-outline">
+            Or join Patreon
+          </a>
+        </div>
+      </div>
+    </div>
+  </section>
+</BaseLayout>

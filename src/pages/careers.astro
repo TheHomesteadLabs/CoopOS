@@ -1,0 +1,41 @@
+---
+import BaseLayout from '@layouts/BaseLayout.astro';
+---
+
+<BaseLayout
+  title="Careers — HomesteadLabs"
+  description="HomesteadLabs is not currently hiring. Pam in HR has reviewed this page."
+>
+  <section class="py-20 md:py-40 border-b border-ink/10 relative overflow-hidden min-h-[80vh] flex items-center">
+    <div class="grain absolute inset-0 opacity-40"></div>
+    <div class="container-prose relative w-full">
+      <div class="text-eyebrow text-ember mb-6">Careers</div>
+      <h1 class="font-display text-6xl md:text-9xl tracking-tightest leading-[0.92] mb-12 max-w-5xl">
+        We are not<br />currently hiring.
+      </h1>
+
+      <div class="grid md:grid-cols-12 gap-8">
+        <div class="md:col-span-7">
+          <p class="text-body-lg text-ink/70 leading-relaxed">
+            Pam in HR has reviewed current headcount and confirmed that the
+            company is operating at capacity. Should this change,
+            opportunities will be posted here.
+          </p>
+          <p class="mt-6 text-body-lg text-ink/70 leading-relaxed">
+            We do not accept unsolicited applications, agency outreach, or
+            résumés in PDF, DOCX, or any other format. The flock is full.
+          </p>
+        </div>
+      </div>
+
+      <div class="mt-20 pt-10 border-t border-ink/10 max-w-3xl">
+        <div class="text-eyebrow text-ink/40 mb-4">Open Positions (0)</div>
+        <div class="card p-12 text-center">
+          <p class="font-display text-3xl text-ink/30 italic">
+            No openings at this time.
+          </p>
+        </div>
+      </div>
+    </div>
+  </section>
+</BaseLayout>
