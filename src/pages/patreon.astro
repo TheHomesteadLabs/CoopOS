@@ -1,6 +1,8 @@
 ---
 import BaseLayout from '@layouts/BaseLayout.astro';
 import { patreonTiers } from '@data/catalog';
+
+const patreonUrl = 'https://patreon.com/HomesteadLabs';
 ---
 
 <BaseLayout
@@ -8,7 +10,7 @@ import { patreonTiers } from '@data/catalog';
   description="Director's cuts, GitHub access, monthly board meetings. Three tiers."
 >
   <!-- HERO -->
-  <section class="py-20 md:py-32 border-b border-ink/10 relative overflow-hidden">
+  <section class="py-20 md:py-32 border-b border-ink/10 mesh-warm relative overflow-hidden">
     <div class="grain absolute inset-0 opacity-40"></div>
     <div class="container-prose relative">
       <div class="text-eyebrow text-ember mb-6">Patreon</div>
@@ -17,8 +19,8 @@ import { patreonTiers } from '@data/catalog';
       </h1>
       <p class="text-body-lg text-ink/70 max-w-2xl leading-relaxed">
         Patreon support gets you the depth version of HomesteadLabs.
-        Longer cuts of every episode. The GitHub repo for every build.
-        And, depending on tier, a seat at the board meeting.
+        Director's cuts of every episode. GitHub repos for every build.
+        Discord access. And, depending on tier, a seat at the board.
       </p>
     </div>
   </section>
@@ -26,55 +28,70 @@ import { patreonTiers } from '@data/catalog';
   <!-- TIERS -->
   <section class="py-20 md:py-32">
     <div class="container-prose">
-      <div class="grid md:grid-cols-3 gap-6 md:gap-8">
+      <div class="grid md:grid-cols-3 gap-6 md:gap-8 items-start">
         {patreonTiers.map((tier, i) => (
           <div class:list={[
-            'card p-8 md:p-10 relative',
-            i === 1 && 'md:scale-105 md:-mt-2 ring-1 ring-ember/30 shadow-2xl shadow-ember/10',
+            'card relative overflow-hidden flex flex-col',
+            i === 1 && 'ring-2 ring-ember shadow-2xl shadow-ember/10',
           ]}>
-            {i === 1 && (
-              <div class="absolute -top-3 left-8">
-                <div class="pill pill-live bg-paper">Most popular</div>
-              </div>
-            )}
-
-            <div class="text-eyebrow text-ember mb-6">Tier {String(i + 1).padStart(2, '0')}</div>
-
-            <h3 class="font-display text-4xl tracking-tighter mb-4">
-              {tier.name}
-            </h3>
-
-            <div class="flex items-baseline gap-1 mb-6">
-              <span class="font-display text-5xl tracking-tighter">${tier.price}</span>
-              <span class="text-sm text-ink/50 font-mono">/ month</span>
+            {/* Cover image */}
+            <div class="aspect-[16/9] border-b border-ink/10 relative">
+              {tier.image ? (
+                <img
+                  src={`/images/patreon/${tier.image}`}
+                  alt={tier.name}
+                  class="w-full h-full object-cover"
+                  loading="lazy"
+                />
+              ) : (
+                <div class="img-placeholder absolute inset-0" data-label={tier.name}></div>
+              )}
+              {i === 1 && (
+                <div class="absolute top-4 right-4">
+                  <div class="pill pill-live bg-paper">Most popular</div>
+                </div>
+              )}
             </div>
 
-            <p class="text-sm text-ink/65 leading-relaxed mb-8">
-              {tier.blurb}
-            </p>
+            <div class="p-8 md:p-10 flex flex-col flex-1">
+              <div class="text-eyebrow text-ember mb-6">Tier {String(i + 1).padStart(2, '0')}</div>
 
-            <ul class="space-y-3 mb-10">
-              {tier.features.map((f) => (
-                <li class="flex gap-3 text-sm text-ink/80 leading-snug">
-                  <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" class="text-ember mt-0.5 shrink-0">
-                    <path d="M20 6L9 17l-5-5" stroke-linecap="round" stroke-linejoin="round" />
-                  </svg>
-                  <span>{f}</span>
-                </li>
-              ))}
-            </ul>
+              <h3 class="font-display text-4xl tracking-tighter mb-4">
+                {tier.name}
+              </h3>
 
-            <a
-              href="https://patreon.com/homesteadlabs"
-              class:list={[
-                'block w-full text-center py-3 text-sm font-medium transition-all',
-                i === 1
-                  ? 'bg-ember text-paper hover:bg-ember-800'
-                  : 'bg-ink text-paper hover:bg-ember',
-              ]}
-            >
-              Join {tier.name}
-            </a>
+              <div class="flex items-baseline gap-1 mb-6">
+                <span class="font-display text-5xl tracking-tighter">${tier.price}</span>
+                <span class="text-sm text-ink/50 font-mono">/ month</span>
+              </div>
+
+              <p class="text-sm text-ink/65 leading-relaxed mb-8">
+                {tier.blurb}
+              </p>
+
+              <ul class="space-y-3 mb-10 flex-1">
+                {tier.features.map((f) => (
+                  <li class="flex gap-3 text-sm text-ink/80 leading-snug">
+                    <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" class="text-ember mt-0.5 shrink-0">
+                      <path d="M20 6L9 17l-5-5" stroke-linecap="round" stroke-linejoin="round" />
+                    </svg>
+                    <span>{f}</span>
+                  </li>
+                ))}
+              </ul>
+
+              
+                href={patreonUrl}
+                class:list={[
+                  'block w-full text-center py-3 text-sm font-medium transition-all',
+                  i === 1
+                    ? 'bg-ember text-paper hover:bg-ember-800'
+                    : 'bg-ink text-paper hover:bg-ember',
+                ]}
+              >
+                Join {tier.name}
+              </a>
+            </div>
           </div>
         ))}
       </div>
@@ -97,9 +114,9 @@ import { patreonTiers } from '@data/catalog';
             What's the director's cut?
           </h3>
           <p class="text-base text-ink/65 leading-relaxed">
-            A longer version of every episode — typically 25 to 40 minutes
-            instead of 14 to 17. More failure footage, deeper engineering
-            reasoning, character beats that didn't make the YouTube cut.
+            A longer version of every episode with more failure footage,
+            deeper engineering reasoning, and character beats that didn't
+            make the public release.
           </p>
         </div>
         <div>
